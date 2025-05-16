@@ -19,6 +19,40 @@
 </head>
 <body>
     <h1>Véletlenszerű macskás dolog</h1>
+    <button onclick="getCat()">Kép lekérése</button>
+    <div id="image_container">
+        <div class="row" id="elso"></div>
+        <div class="row" id="masodik"></div>
+        
+    </div>
+
+
     
+
+
+    <script>
+        const apikey="live_scZcnCAatlx5DLPPZU42s8UPVFNp0gnUCy4CdWiFOG0AztTtD6KkuhvgHdi9KB23";
+        async function getCat(){
+            const res = await fetch('https://api.thecatapi.com/v1/images/search?limit=10', {
+                headers: {
+                    "x-api-key": apikey
+                }
+            });
+            const data = await res.json();
+            for(var i=0; i<9; i++){
+                var imgurl = data[i].url
+                if(i<4){
+                    document.getElementById('image_container').innerHTML+=`<img src='${imgurl}' alt="Macska"/>`
+                }
+                else{
+                    document.querySelector('masodik').innerHTML+=`<img src='${imgurl}' alt="Macska"/>`
+                }
+            }
+        
+
+
+        }
+        
+    </script>
 </body>
 </html>
